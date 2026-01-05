@@ -1,0 +1,38 @@
+# Default configuration for Pink Noise Prior experiments
+# Copy and modify this file for your own experiments
+
+# Experiment info
+name: pnp_default
+seed: 42
+output_dir: outputs
+
+# Data settings
+data_dir: data/maestro
+seq_length: 512
+batch_size: 32
+num_workers: 4
+
+# Model settings
+model_size: small  # Options: tiny, small, medium, large
+vocab_size: 92     # 88 piano keys + 4 special tokens
+max_seq_length: 512
+
+# Training settings
+epochs: 50
+learning_rate: 3.0e-4
+weight_decay: 0.01
+gradient_clip: 1.0
+warmup_steps: 1000
+
+# Pink Noise Prior settings
+# Set use_pink_loss: false for baseline (CE only)
+use_pink_loss: true
+lambda_pink: 0.1        # Weight for spectral loss
+target_slope: -1.0      # -1.0 = pink noise, -2.0 = brownian
+lambda_warmup_epochs: 5 # Gradually increase lambda
+
+# Logging settings
+use_wandb: false
+wandb_project: pink-noise-prior
+log_every: 100
+eval_every: 1000
