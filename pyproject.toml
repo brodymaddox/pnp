@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pink-noise-prior"
+version = "0.1.0"
+description = "Enforcing Fractal Dynamics in Symbolic Music Generation via Differentiable Spectral Regularization"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Research Project"}
+]
+keywords = ["music generation", "transformers", "fractal", "pink noise", "MIDI"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Multimedia :: Sound/Audio :: MIDI",
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "numpy>=1.21.0",
+    "pretty_midi>=0.2.10",
+    "music21>=9.1.0",
+    "tqdm>=4.65.0",
+    "matplotlib>=3.7.0",
+    "scipy>=1.10.0",
+    "pyyaml>=6.0",
+    "tensorboard>=2.13.0",
+    "wandb>=0.15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+pnp-train = "pnp.scripts.train:main"
+pnp-generate = "pnp.scripts.generate:main"
+pnp-evaluate = "pnp.scripts.evaluate:main"
+pnp-download-data = "pnp.scripts.download_data:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
